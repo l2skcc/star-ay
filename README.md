@@ -19,15 +19,18 @@ aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS
 
 ### git 소스 upload, download 
 ###### 로컬에서 git으로 소스 upload
+이건 어쩔 수 없이 노가다 해야한다.
 ```
 git add .
 git commit -m "image change"
 git push
 ```
-
+##### 우분투에 git 소스 download
+우분투에 접속하여, 각 마이크로 서비스 별포 폴더를 생성한다.
+> 아래 내용에서 이동할 폴더 경로와 git주소만을 바꾸어서 수행한다.
 ```
 cd /home/skccadmin/carrental-ay/gateway/
-git clonehttps://github.com/l2skcc/gateway-ay.git
+git clone https://github.com/l2skcc/gateway-ay.git
 cd /home/skccadmin/carrental-ay/managment/
 git clone https://github.com/l2skcc/management-ay.git
 cd /home/skccadmin/carrental-ay/view/
@@ -43,15 +46,19 @@ git clone https://github.com/l2skcc/payment-ay.git
 ```
 
 ### gateway 빌드/배포/서비스노출
+> 아래 내용에서 이동할 폴더 경로와 registry주소를 바꾸어서 수행한다.
 ```
+cd /home/skccadmin/carrental-ay/gateway/gateway-ay
 mvn package
 docker build -t 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-gateway:v1 .
 docker push 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-gateway:v1
+
 kubectl create deploy gateway --image=052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-gateway:v1
 kubectl expose deployment.apps/gateway --type=LoadBalancer --port=8080
 ```
 
 ### 서비스 빌드
+> 아래 내용에서 이동할 폴더 경로와 registry주소를 바꾸어서 수행한다.
 ```
 cd /home/skccadmin/carrental-ay/managment/management-ay
 mvn package
@@ -94,6 +101,7 @@ watch kubectl get all -n kafka
 ```
 
 ### 서비스 배포 
+> 아래 내용에서 이동할 폴더 경로를 바꾸어서 수행한다.
 ```
 cd /home/skccadmin/carrental-ay/managment/management-ay/kubernetes
 kubectl apply -f .
