@@ -115,4 +115,6 @@ cd /home/skccadmin/carrental-ay/payment/payment-ay/kubernetes
 kubectl apply -f .
 cd /home/skccadmin/carrental-ay/view/view-ay/kubernetes
 kubectl apply -f .
+cd /home/skccadmin/carrental-ay/star/star-ay/kubernetes
+kubectl apply -f .
 ```
