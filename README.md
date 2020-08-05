@@ -25,6 +25,7 @@ git commit -m "image change"
 git push
 ```
 
+```
 cd /home/skccadmin/carrental-ay/gateway/
 git clonehttps://github.com/l2skcc/gateway-ay.git
 cd /home/skccadmin/carrental-ay/managment/
@@ -39,15 +40,19 @@ cd /home/skccadmin/carrental-ay/star/
 git clone https://github.com/l2skcc/star-ay.git
 cd /home/skccadmin/carrental-ay/payment/
 git clone https://github.com/l2skcc/payment-ay.git
+```
 
 ### gateway 빌드/배포/서비스노출
+```
 mvn package
 docker build -t 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-gateway:v1 .
 docker push 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-gateway:v1
 kubectl create deploy gateway --image=052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-gateway:v1
 kubectl expose deployment.apps/gateway --type=LoadBalancer --port=8080
+```
 
 ### 서비스 빌드
+```
 cd /home/skccadmin/carrental-ay/managment/management-ay
 mvn package
 docker build -t 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-management:v1 .
@@ -72,9 +77,10 @@ cd /home/skccadmin/carrental-ay/payment/payment-ay
 mvn package
 docker build -t 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-payment:v1 .
 docker push 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-payment:v1
-
+```
 
 ### 카프카 설치 
+```
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 kubectl --namespace kube-system create sa tiller
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
@@ -85,8 +91,10 @@ helm repo update
 helm install --name my-kafka --namespace kafka incubator/kafka
 
 watch kubectl get all -n kafka
+```
 
 ### 서비스 배포 
+```
 cd /home/skccadmin/carrental-ay/managment/management-ay/kubernetes
 kubectl apply -f .
 cd /home/skccadmin/carrental-ay/rental/rental-ay/kubernetes
@@ -99,3 +107,4 @@ cd /home/skccadmin/carrental-ay/payment/payment-ay/kubernetes
 kubectl apply -f .
 cd /home/skccadmin/carrental-ay/view/view-ay/kubernetes
 kubectl apply -f .
+```
