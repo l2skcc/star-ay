@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: star
-          image: username/star:latest
+          image: 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-star:latest
           ports:
             - containerPort: 8080
           readinessProbe:
