@@ -84,6 +84,11 @@ cd /home/skccadmin/carrental-ay/payment/payment-ay
 mvn package
 docker build -t 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-payment:v1 .
 docker push 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-payment:v1
+
+cd /home/skccadmin/carrental-ay/star/star-ay
+mvn package
+docker build -t 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-star:v1 .
+docker push 052937454741.dkr.ecr.ap-southeast-1.amazonaws.com/ecr-skcc-admin16-star:v1
 ```
 
 ### 카프카 설치 
