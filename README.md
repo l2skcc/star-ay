@@ -97,3 +97,5 @@ cd /home/skccadmin/carrental-ay/veiw/veiw-ay/kubernetes
 kubectl apply -f .
 cd /home/skccadmin/carrental-ay/payment/payment-ay/kubernetes
 kubectl apply -f .
+cd /home/skccadmin/carrental-ay/view/view-ay/kubernetes
+kubectl apply -f .
